@@ -1,0 +1,18 @@
+# OS and editor files
+.sass-cache
+*.sublime-workspace
+*.tmp
+.tmp/*
+composer.lock
+composer.phar
+
+# Asset pipeline files
+node_modules
+jspm_packages
+src/rev-manifest.json
+
+# Build files
+app/public/assets/*
+
+# Keep empty folders
+!.gitkeep
