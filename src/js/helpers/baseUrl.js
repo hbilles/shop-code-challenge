@@ -1,7 +1,7 @@
 export default function baseUrl() {
-	if (location.hostname == 'localhost' || location.hostname == 'shop-code-challenge.dev') {
-		return 'http://shop-code-challenge.dev/'
-	} else {
-		return location.protocol + '//' + location.host + '/'
-	}
+	const protocol = location.protocol,
+		host = location.host,
+		port = location.port ? `:${location.port}` : ''
+
+	return `${protocol}//${host}/`
 }

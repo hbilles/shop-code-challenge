@@ -8,6 +8,6 @@ router.get('/', function(req, res, next) {
 });
 
 // import the Products API Controller
-require(path.join(__dirname, 'api/products'))(router)
+require('./api/products')(router)
 
 module.exports = router;

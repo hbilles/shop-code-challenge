@@ -5,6 +5,7 @@ const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const expressNunjucks = require('express-nunjucks')
+const history = require('connect-history-api-fallback')
 
 const controllers = require(path.join(__dirname, 'controllers'))
 
@@ -25,6 +26,18 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
+
+app.use(history({
+	index: '/',
+	rewrites: [
+		{
+			from: /^\/api\/.*$/,
+			to: function(context) {
+				return context.parsedUrl.pathname
+			}
+		}
+	]
+}))
 
 app.use('/', controllers)
 

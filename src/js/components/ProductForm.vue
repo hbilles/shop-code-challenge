@@ -5,36 +5,43 @@
 
 		<fieldset>
 			<ol>
-				<li class="textfield textfield--full-width textfield--floating-label">
+				<li class="question question--hide-label">
+					<label class="question__label" for="title">Product Name</label>
 					<input
 						type="text"
-						class="textfield__input"
+						class="question__input"
 						id="title"
 						name="title"
+						placeholder="Product Name"
 						v-model="title">
-					<label class="textfield__label" for="title">Product Name</label>
 				</li>
 
-				<li class="textfield textfield--full-width textfield--floating-label">
+				<li class="question question--hide-label">
+					<label class="question__label" for="price">Price ($)</label>
 					<input
 						type="number"
-						class="textfield__input"
+						class="question__input"
 						id="price"
 						name="price"
+						placeholder="Price ($)"
 						v-model="price">
-					<label class="textfield__label" for="price">Price ($)</label>
 				</li>
 
-				<li class="textfield textfield--full-width textfield--floating-label">
+				<li class="question question--hide-label">
+					<label class="question__label" for="inventory">Inventory</label>
 					<input
 						type="number"
-						class="textfield__input"
+						class="question__input"
 						id="inventory"
 						name="inventory"
+						placeholder="Inventory"
 						v-model="inventory">
-					<label class="textfield__label" for="inventory">Inventory</label>
 				</li>
 			</ol>
+
+			<button
+				class="button button--outlined button--colored"
+				@click="submit">Submit</button>
 		</fieldset>
 	</div>
 </form>
@@ -43,6 +50,7 @@
 <script>
 import request from 'superagent'
 import store from '../vuex/store'
+import baseUrl from '../helpers/baseUrl'
 
 export default {
 	name: 'ProductForm',
@@ -55,16 +63,26 @@ export default {
 
 	},
 
-	data() {
+	data: function() {
 		return {
-			title: String,
-			price: Number,
-			inventory: Number
+			title: '',
+			price: '',
+			inventory: ''
 		}
 	},
 
 	computed: {
+		baseUrl: function() {
+			return baseUrl()
+		},
 
+		postData: function() {
+			return {
+				title: this.title,
+				price: this.price,
+				inventory: this.inventory
+			}
+		}
 	},
 
 	watch: {
@@ -72,7 +90,19 @@ export default {
 	},
 
 	methods: {
-
+		submit: function() {
+			request
+				.post(`${this.baseUrl}api/products/add`)
+				.send(this.postData)
+				.set('Accept', 'application/json')
+				.end(function(err, res) {
+					if (!err) {
+						router.push({name: 'productList'})
+					} else {
+						console.log(err)
+					}
+				})
+		}
 	}
 }
 </script>

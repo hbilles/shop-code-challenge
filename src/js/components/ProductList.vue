@@ -11,23 +11,22 @@
 <script>
 import request from 'superagent'
 import store from '../vuex/store'
+import baseUrl from '../helpers/baseUrl'
 
 export default {
 	name: 'ProductList',
 
 	created: function() {
-
+		this.getProducts()
 	},
 
 	ready: function() {
 
 	},
 
-	data() {
+	data: function() {
 		return {
-			title: String,
-			price: Number,
-			inventory: Number
+			products: []
 		}
 	},
 
@@ -40,7 +39,15 @@ export default {
 	},
 
 	methods: {
-
+		getProducts: function() {
+			const self = this
+			request
+				.get(baseUrl() + 'api/products')
+				.set('Accept', 'application/json')
+				.end(function(err, res) {
+					self.products = res.body.data
+				})
+		}
 	}
 }
 </script>

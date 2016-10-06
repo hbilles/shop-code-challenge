@@ -34,8 +34,8 @@ const routes = [
 
 // initialize and configure new router
 const router = new Router({
-	routes,
-	history: true
+	mode: 'history',
+	routes
 })
 
 // start App
