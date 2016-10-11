@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize')
 
+// This model is ephemeral.
+// Each time the app starts the existing data and table structure is reset.
 module.exports = function(sequelize, DataTypes) {
 	var Products = sequelize.define('products', {
 		id: {

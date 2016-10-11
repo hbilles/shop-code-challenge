@@ -19,7 +19,7 @@
 				<li class="question question--hide-label">
 					<label class="question__label" for="price">Price ($)</label>
 					<input
-						type="number"
+						type="text"
 						class="question__input"
 						id="price"
 						name="price"
@@ -41,16 +41,14 @@
 
 			<button
 				class="button button--outlined button--colored"
-				@click="submit">Submit</button>
+				@click="submitForm($event)">Submit</button>
 		</fieldset>
 	</div>
 </form>
 </template>
 
 <script>
-import request from 'superagent'
-import store from '../vuex/store'
-import baseUrl from '../helpers/baseUrl'
+import shop from '../api/shop'
 
 export default {
 	name: 'ProductForm',
@@ -72,10 +70,6 @@ export default {
 	},
 
 	computed: {
-		baseUrl: function() {
-			return baseUrl()
-		},
-
 		postData: function() {
 			return {
 				title: this.title,
@@ -90,18 +84,20 @@ export default {
 	},
 
 	methods: {
-		submit: function() {
-			request
-				.post(`${this.baseUrl}api/products/add`)
-				.send(this.postData)
-				.set('Accept', 'application/json')
-				.end(function(err, res) {
-					if (!err) {
-						router.push({name: 'productList'})
-					} else {
-						console.log(err)
-					}
-				})
+		submitForm: function(e) {
+			const self = this
+
+			// prevent form from submitting
+			// as we want to post via AJAX
+			e.preventDefault()
+
+			// set up the cb
+			function pushRoute() {
+				return self.$router.push({name: 'productList'})
+			}
+
+			// save the product to server
+			shop.saveProduct(this.postData, pushRoute)
 		}
 	}
 }

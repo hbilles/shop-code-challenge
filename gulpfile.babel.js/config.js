@@ -3,7 +3,7 @@ import yargs from 'yargs'
 import errorHandler from './lib/errorHandler'
 
 const paths = {
-	url: 'http://shop-code-challenge.dev',
+	url: 'http://localhost:3000',
 	src: './src',
 	dist: './app/public/assets',
 	views: './app/views',
@@ -49,7 +49,7 @@ export default {
 			src: path.join(paths.src, 'js'),
 			dist: path.join(paths.dist, 'js'),
 			files: ['app.js'],
-			extensions: ['js', null],
+			extensions: ['js', 'vue', null],
 		},
 
 		views: {

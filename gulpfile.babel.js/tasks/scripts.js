@@ -34,7 +34,7 @@ const tasks = {
 			.pipe(rename, filename)
 			.pipe(sourcemaps.write, '.')
 			.pipe(gulp.dest, paths.dist)
-			.pipe(browserSync.stream, { match: '**/*.js' })
+			.pipe(browserSync.stream, { match: [`**/*.{${config.tasks.scripts.extensions}}`] })
 			.pipe(filter, [`**/*.{${config.tasks.scripts.extensions}}`])
 			.pipe(uglify)
 			.pipe(size, config.output.size);

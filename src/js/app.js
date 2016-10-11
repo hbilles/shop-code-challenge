@@ -6,8 +6,10 @@ Vue.use(Router)
 
 // import Vue components to route
 import App from './components/App.vue'
+import store from './store'
 import ProductList from './components/ProductList.vue'
 import ProductForm from './components/ProductForm.vue'
+import Cart from './components/Cart.vue'
 
 // map routes to components
 const routes = [
@@ -18,7 +20,7 @@ const routes = [
 		children: [
 			{
 				// home
-				path: '',
+				path: 'products',
 				name: 'productList',
 				component: ProductList
 			},
@@ -27,6 +29,12 @@ const routes = [
 				path: 'add',
 				name: 'addProduct',
 				component: ProductForm
+			},
+			{
+				// shopping cart
+				path: 'cart',
+				name: 'cart',
+				component: Cart
 			}
 		]
 	}
@@ -40,5 +48,6 @@ const router = new Router({
 
 // start App
 const app = new Vue({
-	router
+	router,
+	store
 }).$mount('#app')

@@ -1,57 +1,86 @@
 <template>
-<div class="products">
+<div>
 	<h2>Product List</h2>
-	<ul>
-		<li>foo</li>
-		<li>bar</li>
+	<ul class="products">
+		<li class="product"
+			v-for="product in products">
+			<div class="product__info">
+				<span class="product__title">{{ product.title }}</span>
+				<span class="product__price">${{ product.price }}</span>
+			</div>
+			<button
+				:disabled="!product.inventory"
+				@click="addToCart(product)"
+				class="button button--solid product__add-to-cart">Add to Cart</button>
+		</li>
 	</ul>
 </div>
 </template>
 
 <script>
-import request from 'superagent'
-import store from '../vuex/store'
-import baseUrl from '../helpers/baseUrl'
+import {
+	mapGetters,
+	mapActions
+} from 'vuex'
 
 export default {
 	name: 'ProductList',
 
 	created: function() {
-		this.getProducts()
-	},
-
-	ready: function() {
-
-	},
-
-	data: function() {
-		return {
-			products: []
-		}
+		this.$store.dispatch('getAllProducts')
 	},
 
 	computed: {
-
-	},
-
-	watch: {
-
+		...mapGetters({
+			products: 'allProducts'
+		})
 	},
 
 	methods: {
-		getProducts: function() {
-			const self = this
-			request
-				.get(baseUrl() + 'api/products')
-				.set('Accept', 'application/json')
-				.end(function(err, res) {
-					self.products = res.body.data
-				})
-		}
+		...mapActions([
+			'addToCart'
+		])
 	}
 }
 </script>
 
 <style lang="scss" scoped>
-	
+	@import '../helpers/vars.scss';
+
+	.products {
+		display: flex;
+		flex-wrap: wrap;
+		list-style: none;
+		margin: 0 0 0 -1rem;
+		width: calc(100% + 1rem);
+		padding: 0;
+	}
+
+	.product {
+		@include shadow-2dp-alt();
+
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		width: 18rem;
+		margin: 0 0 1em 1em;
+		padding: .5em 1em;
+
+		&__info {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-end;
+			width: 100%;
+			margin: 0 0 .5rem;
+		}
+
+		&__title,
+		&__price {
+			display: block;
+		}
+
+		&__title {
+			font-weight: 700;
+		}
+	}
 </style>

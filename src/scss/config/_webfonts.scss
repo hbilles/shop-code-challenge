@@ -1,6 +1,6 @@
 @include font-face(WebSymbols, '/ui/webfonts/WebSymbols');
 @import 'https://fonts.googleapis.com/css?family=Raleway:100,300';
-@import 'https://fonts.googleapis.com/css?family=Source+Sans+Pro';
+@import 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,700';
 
 @mixin font-sans($weight: 300, $style: normal, $family: 'Source Sans Pro') {
 	font-family: $family, helvetica, arial, sans-serif;
