@@ -18,7 +18,7 @@ export default {
 			.post(baseUrl() + 'api/products/add')
 			.send(data)
 			.set('Accept', 'application/json')
-			.end((err, res) => !err ? cb() : errorCb())
+			.end((err, res) => !err ? cb() : errorCb(err))
 	},
 
 	// @param Object containing product ID
