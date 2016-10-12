@@ -63,6 +63,33 @@ a.button {
 		line-height: $button-height * .6;
 	}
 
+	&.button--round {
+		position: relative;
+		border-radius: 1.8rem;
+		min-width: 0;
+		width: 1.8rem;
+		height: 1.8rem;
+		padding: 0 !important;
+
+		span {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			line-height: 1.8rem;
+		}
+
+		&.button--small {
+			width: 1.4rem;
+			height: 1.4rem;
+
+			span {
+				line-height: 1.4rem;
+			}
+		}
+	}
+
 	&.button--solid {
 		background-color: $button-primary-color;
 		color: $button-secondary-color;

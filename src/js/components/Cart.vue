@@ -4,14 +4,14 @@
 	<section class="cart">
 		<header class="cart__header">
 			<span class="cart__header__title">Item</span>
-			<span class="cart__header__price">Price</span>
 			<span class="cart__header__quantity">Quantity</span>
+			<span class="cart__header__price">Price</span>
+			<span class="cart__header__spacer"></span>
 		</header>
 		
 		<div class="item"
 			v-for="item in cartProducts">
 			<span class="item__title">{{ item.title }}</span>
-			<span class="item__price">${{ item.price }}</span>
 			<span class="item__quantity">
 				<span class="item__quantity__number">{{ item.quantity }}</span>
 
@@ -25,10 +25,19 @@
 						class="button button--small button--solid item__add-to-cart">+</button>
 				</span>
 			</span>
+			<span class="item__price">${{ item.price }}</span>
+			<span class="item__action">
+				<button
+					@click="removeAllFromCart(item)"
+					class="button button--solid button--round button--small item__remove-all-from-cart">
+						<span>x</span>
+					</button>
+			</span>
 		</div>
 
 		<div class="cart__total">
 			<span class="cart__total__label">Total:</span>
+			<span class="cart__total__spacer"></span>
 			<span class="cart__total__price">${{ total }}</span>
 			<span class="cart__total__spacer"></span>
 		</div>
@@ -70,7 +79,8 @@ export default {
 	methods: {
 		...mapActions([
 			'addToCart',
-			'removeFromCart'
+			'removeFromCart',
+			'removeAllFromCart'
 		])
 	}
 }
@@ -95,6 +105,10 @@ export default {
 
 			&__title {
 				width: 50%;
+			}
+
+			&__quantity {
+				text-align: center;
 			}
 		}
 
@@ -124,9 +138,11 @@ export default {
 		padding: .5em 1em;
 
 		&__title,
+		&__quantity,
 		&__price,
-		&__quantity {
+		&__action {
 			display: table-cell;
+			vertical-align: middle;
 			padding: .5em 0;
 			border-top: 1px solid rgba(0, 0, 0, .1);
 		}
@@ -137,13 +153,16 @@ export default {
 		}
 
 		&__quantity {
+			text-align: center;
+
 			&__number {
 				display: block;
 			}
 		}
 
 		&__add-to-cart,
-		&__remove-from-cart {
+		&__remove-from-cart,
+		&__remove-all-from-cart {
 			font-weight: 700;
 		}
 	}

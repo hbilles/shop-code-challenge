@@ -31,6 +31,16 @@ const mutations = {
 				return true
 			}
 		})
+	},
+
+	REMOVE_ALL_FROM_CART(state, { id }) {
+		state.added.some(function(product, index) {
+			if (product.id === id) {
+				state.added.splice(index, 1)
+
+				return true
+			}
+		})
 	}
 }
 

@@ -21,3 +21,9 @@ export const removeFromCart = ({ commit }, product) => {
 		id: product.id
 	})
 }
+
+export const removeAllFromCart = ({ commit }, product) => {
+	commit('REMOVE_ALL_FROM_CART', {
+		id: product.id
+	})
+}
