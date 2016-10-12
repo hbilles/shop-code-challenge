@@ -36,7 +36,7 @@
 				<li class="question">
 					<label class="question__label" for="inventory">Inventory</label>
 					<input
-						type="number"
+						type="text"
 						class="question__input"
 						id="inventory"
 						name="inventory"
@@ -97,7 +97,7 @@ export default {
 		inventoryError: function() {
 			if (!this.inventory.length && this.validate) {
 				return 'Please enter the number of items for this product'
-			} else if (isNaN(this.price) && this.validate) {
+			} else if (isNaN(this.inventory) && this.validate) {
 				return 'Please enter a number'
 			} else {
 				return false
