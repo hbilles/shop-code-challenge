@@ -13,7 +13,7 @@ const models = [
 	'products'
 ]
 
-models.forEach(function(model) {
+models.forEach(model => {
 	module.exports[model] = sequelize.import(path.join(__dirname, model))
 })
 

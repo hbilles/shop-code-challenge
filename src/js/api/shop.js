@@ -21,19 +21,21 @@ export default {
 			.end((err, res) => !err ? cb() : errorCb(err))
 	},
 
-	// @param Object containing product ID
-	addToCart({id}) {
+	// @param Object: String ID, Number count
+	// @param Function cb
+	addToCart({ id, count }, cb) {
 		request
-			.post(baseUrl() + `api/products/${id}/decrement`)
+			.post(baseUrl() + `api/products/${id}/decrement/${count}`)
 			.set('Accept', 'application/json')
-			.end((err, res) => !err ? res : err)
+			.end((err, res) => !err ? cb(res.body.inventory) : console.log(err))
 	},
 
-	// @param Object containing product ID
-	removeFromCart({id}) {
+	// @param Object: String ID, Number count
+	// @param Function cb
+	removeFromCart({ id, count }, cb) {
 		request
-			.post(baseUrl() + `api/products/${id}/increment`)
+			.post(baseUrl() + `api/products/${id}/increment/${count}`)
 			.set('Accept', 'application/json')
-			.end((err, res) => !err ? res : err)
+			.end((err, res) => !err ? cb(res.body.inventory) : console.log(err))
 	}
 }

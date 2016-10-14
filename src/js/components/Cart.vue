@@ -17,18 +17,18 @@
 
 				<span class="item__quantity__buttons button-group">
 					<button
-						@click="removeFromCart(item)"
+						@click="removeFromCart({ product: item, count: 1 })"
 						class="button button--small button--solid item__remove-from-cart">-</button>
 					<button
 						:disabled="!item.inventory"
-						@click="addToCart(item)"
+						@click="addToCart({ product: item, count: 1 })"
 						class="button button--small button--solid item__add-to-cart">+</button>
 				</span>
 			</span>
 			<span class="item__price">${{ item.price }}</span>
 			<span class="item__action">
 				<button
-					@click="removeAllFromCart(item)"
+					@click="removeFromCart({ product: item, count: item.quantity })"
 					class="button button--solid button--round button--small item__remove-all-from-cart">
 						<span>x</span>
 					</button>

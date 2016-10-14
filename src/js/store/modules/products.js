@@ -9,12 +9,12 @@ const mutations = {
 		state.all = products
 	},
 
-	ADD_TO_CART(state, { id }) {
-		state.all.find(product => product.id === id).inventory--
+	ADD_TO_CART(state, { id, inventory }) {
+		state.all.find(product => product.id === id).inventory = inventory
 	},
 
-	REMOVE_FROM_CART(state, { id }) {
-		state.all.find(product => product.id === id).inventory++
+	REMOVE_FROM_CART(state, { id, inventory }) {
+		state.all.find(product => product.id === id).inventory = inventory
 	}
 }
 

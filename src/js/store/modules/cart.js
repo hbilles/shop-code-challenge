@@ -7,36 +7,31 @@ const state = {
 
 // mutations
 const mutations = {
-	ADD_TO_CART(state, { id }) {
+	ADD_TO_CART(state, { id, count }) {
 		const record = state.added.find(product => product.id === id)
+		// create new item in cart if not exist
 		if (!record) {
 			state.added.push({
 				id,
-				quantity: 1
+				quantity: count
 			})
 		} else {
-			record.quantity++
+			// update existing cart item
+			record.quantity += count
 		}
 	},
 
-	REMOVE_FROM_CART(state, { id }) {
+	REMOVE_FROM_CART(state, { id, count }) {
+		// find item and item index in cart
 		state.added.some(function(product, index) {
 			if (product.id === id) {
-				if (product.quantity <= 1) {
+				// remove item from cart entirely
+				if (product.quantity <= count) {
 					state.added.splice(index, 1)
 				} else {
-					product.quantity--
+					// update existing cart item
+					product.quantity -= count
 				}
-
-				return true
-			}
-		})
-	},
-
-	REMOVE_ALL_FROM_CART(state, { id }) {
-		state.added.some(function(product, index) {
-			if (product.id === id) {
-				state.added.splice(index, 1)
 
 				return true
 			}

@@ -8,22 +8,24 @@ export const getAllProducts = ({ commit }) => {
 	})
 }
 
-export const addToCart = ({ commit }, product) => {
+export const addToCart = ({ commit }, { product, count }) => {
 	if (product.inventory > 0) {
-		commit('ADD_TO_CART', {
-			id: product.id
+		shop.addToCart({ id: product.id, count }, inventory => {
+			commit('ADD_TO_CART', {
+				id: product.id,
+				count,
+				inventory
+			})
 		})
 	}
 }
 
-export const removeFromCart = ({ commit }, product) => {
-	commit('REMOVE_FROM_CART', {
-		id: product.id
-	})
-}
-
-export const removeAllFromCart = ({ commit }, product) => {
-	commit('REMOVE_ALL_FROM_CART', {
-		id: product.id
+export const removeFromCart = ({ commit }, { product, count }) => {
+	shop.removeFromCart({ id: product.id, count }, inventory => {
+		commit('REMOVE_FROM_CART', {
+			id: product.id,
+			count,
+			inventory
+		})
 	})
 }

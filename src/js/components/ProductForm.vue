@@ -122,18 +122,14 @@ export default {
 
 			// if there are no errors, submit the form
 			if (!this.hasErrors) {
-				// set up the cb
-				function pushRoute() {
-					return self.$router.push({name: 'productList'})
-				}
-
-				// set up the errorCb
-				function errorCb(err) {
-					console.log(err)
-				}
-
 				// save the product to server
-				shop.saveProduct(this.postData, pushRoute, errorCb)
+				shop.saveProduct(
+					this.postData,
+					// handle success
+					() => self.$router.push({name: 'productList'}),
+					// handle error
+					(err) => console.log(err)
+				)
 			}
 		},
 

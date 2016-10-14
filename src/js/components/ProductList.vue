@@ -10,7 +10,7 @@
 			</div>
 			<button
 				:disabled="!product.inventory"
-				@click="addToCart(product)"
+				@click="addToCart({product: product, count: 1})"
 				class="button button--solid product__add-to-cart">Add to Cart</button>
 		</li>
 	</ul>

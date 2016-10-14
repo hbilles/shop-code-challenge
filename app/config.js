@@ -1,7 +1,7 @@
 const path = require('path')
 const dbPath = path.resolve('./database')
 
-module.exports = function(env) {
+module.exports = env => {
 	switch(env) {
 		case 'development':
 			return {
