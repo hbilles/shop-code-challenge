@@ -2,22 +2,22 @@
 
 ## Project Tree
 
-  .
-  ├── app               # The Node server
-  │   ├── bin
-  │   ├── controllers
-  │   ├── models
-  │   ├── public
-  │   │   └── assets    # Compiled styles and scripts are saved here
-  │   ├── views
-  │   ├── app.js        # Entry point for server
-  │   └── config.js     # Set environment variables here
-  ├── database          # SQLite databases
-  ├── gulpfile.babel.js # Gulp task runners
-  └── src               # Front-end source code
-      ├── js
-      ├── scss
-      └── views
+    .
+    ├── app               # The Node server
+    │   ├── bin
+    │   ├── controllers
+    │   ├── models
+    │   ├── public
+    │   │   └── assets    # Compiled styles and scripts are saved here
+    │   ├── views
+    │   ├── app.js        # Entry point for server
+    │   └── config.js     # Set environment variables here
+    ├── database          # SQLite databases
+    ├── gulpfile.babel.js # Gulp task runners
+    └── src               # Front-end source code
+        ├── js
+        ├── scss
+        └── views
 
 ## Front-End Build Process
 
